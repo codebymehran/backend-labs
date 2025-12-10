@@ -71,16 +71,33 @@ console.log('─'.repeat(50));
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.log('\n\n\n✅ Exercise complete!');
+
 // ============================================
 //! 📝 REFACTORING NOTES
 // ============================================
-// What I learned:
+//* What I learned:
 // -
 //
-// What I'd change if I came back:
+//* What I'd change if I came back:
 // -
 //
-// Questions I still have:
+//* Questions I still have:
 // -
 
 TEMPLATE
