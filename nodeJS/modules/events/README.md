@@ -99,3 +99,8 @@ Expose the critical timing issue with event emission order.
 - [ ] Exercise 5
 - [ ] Exercise 6
 - [ ] Exercise 7
+
+
+
+
+

@@ -10,7 +10,7 @@
 
 // Modify the solution to:
 
-// Count how many items succeeded vs failed
+//## Count how many items succeeded vs failed
 // Log a summary at the end: "Processed: 3 successful, 2 failed"
 
 // Try it! This will help cement your understanding.
@@ -19,7 +19,7 @@ console.log('\n📂 Running: modules/events/exercise-03.js');
 console.log('─'.repeat(50));
 
 // ============================================
-//! ✅ WORKING SOLUTION
+//* ✅ WORKING SOLUTION
 // ============================================
 
 import { EventEmitter } from 'events';
@@ -58,7 +58,7 @@ processor.on('data', (item) => {
       processor.successCount++; // Track success
       console.log('✅ Successfully processed:', item);
     } catch (error) {
-      
+
       // If error occurs, emit an 'error' event
       processor.errorCount++; // Track error
       processor.emit('error', error);

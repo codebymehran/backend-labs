@@ -2,7 +2,7 @@
 
 // console.log('Current directory:', process.cwd());
 
-import './modules/events/exercise-03.js';
+import './modules/events/exercise-04.js';
 // import '.modules/events/exercise-02.js';
 // import '.modules/fs/exercise-01.js';
 

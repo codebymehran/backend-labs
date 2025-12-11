@@ -408,4 +408,178 @@ Updated README with quick reference and mini-tutorials"
 
 ---
 
-**Which style fits you better?**
+
+
+<!-- === MAIN HEADING - Bold Blue -->
+<!-- --- Sub Heading - Bold Cyan -->
+<!-- ... Minor Heading - Light Blue -->
+
+<!-- * Key point - green -->
+<!-- ! CRITICAL - bold red -->
+<!-- ? Question - purple italic -->
+<!-- ^ footnote - gray italic -->
+<!-- @ Example - gold -->
+
+<!-- + Addition - bright green -->
+<!-- - Removal - dark red -->
+<!-- $ Code - orange -->
+<!-- % Bug - magenta -->
+<!-- & Related - purple -->
+<!-- ~ WIP - cyan -->
+<!-- = Formula - dark gold -->
+<!-- > Output - olive -->
+
+<!-- todo Action item -->
+
+
+
+### For above colors i am using vs Code colorful comments extension and code is below
+
+```json
+"colorful-comments.tags": [
+    {
+      "tag": "===",
+      "color": "#0066CC",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": true,
+      "italic": false
+    },
+    {
+      "tag": "---",
+      "color": "#00A3CC",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": true,
+      "italic": false
+    },
+    {
+      "tag": "...",
+      "color": "#4A90E2",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#1FA73F",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": true,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#7D3C98",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": true
+    },
+    {
+      "tag": "@",
+      "color": "#D68910",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "^",
+      "color": "#474747",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": true
+    },
+    {
+      "tag": "todo",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "+",
+      "color": "#00B050",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "-",
+      "color": "#C70039",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "//",
+      "color": "#999999",
+      "strikethrough": true,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "$",
+      "color": "#E67E22",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "%",
+      "color": "#D4009E",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "&",
+      "color": "#8A4FFF",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "~",
+      "color": "#00CED1",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "=",
+      "color": "#B8860B",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": ">",
+      "color": "#556B2F",
+      "strikethrough": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    }
+  ],
+```
