@@ -47,7 +47,7 @@ class DataProcessor extends EventEmitter {
 // STEP 2: Create an instance
 const processor = new DataProcessor();
 
-// STEP 3: Attach 'data' listener with error handling
+// STEP 3: Attach 'data' listener with error handling using anonymous cleanup function
 
 processor.on('data', (item) => {
     try {
