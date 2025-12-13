@@ -16,7 +16,7 @@ console.log('─'.repeat(50));
 // ============================================
 
 // ============================================
-// PSEUDOCODE - Exercise 5: Memory Management
+// Exercise 5: Memory Management
 // ============================================
 
 // 1. Import EventEmitter
@@ -54,11 +54,11 @@ const manager = new PubSub()
 const TOPIC_NAME = 'user:update'
 
 // 4. Define 5 unique handler functions (named functions recommended for removal)
-function handlerA(msg) { console.log("A received:"), msg }
-function handlerB(msg) { console.log("B received:"), msg }
-function handlerC(msg) { console.log("C received:"), msg }
-function handlerD(msg) { console.log("D received:"), msg }
-function handlerE(msg) { console.log("E received:"), msg }
+function handlerA(msg) { console.log("A received:", msg) }
+function handlerB(msg) { console.log("B received:", msg) }
+function handlerC(msg) { console.log("C received:", msg) }
+function handlerD(msg) { console.log("D received:", msg) }
+function handlerE(msg) { console.log("E received:", msg) }
 
 
 // 5. Subscribe all 5 handlers to the TOPIC_NAME
@@ -70,7 +70,7 @@ manager.subscribe(TOPIC_NAME, handlerE)
 
 
 // 6. Log the active listener count (use the listenerCount() method)
-print "\nActive listeners BEFORE unsubscribe:", manager.listenerCount(TOPIC_NAME)
+console.log("\nActive listeners BEFORE unsubscribe:", manager.listenerCount(TOPIC_NAME));
 // Expected count: 5
 
 
@@ -80,12 +80,12 @@ manager.unsubscribe(TOPIC_NAME, handlerD)
 
 
 // 8. Log the active listener count AGAIN
-print "Active listeners AFTER unsubscribe:", manager.listenerCount(TOPIC_NAME)
+ console.log("Active listeners AFTER unsubscribe:", manager.listenerCount(TOPIC_NAME));
 // Expected count: 3
 
 
 // 9. Publish an event to the topic
-print "\n--- Publishing Event ---"
+console.log("\n--- Publishing Event ---");
 manager.publish(TOPIC_NAME, "System Update 4.1.0")
 
 // Expected output: Handlers A, C, and E should log the message.
