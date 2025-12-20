@@ -1,0 +1,33 @@
+// index.js - Quick Testing Playground
+// Change the import to test different modules and see results in terminal
+
+import chalk from 'chalk';
+import fs from 'fs';
+// Optional: show current working directory
+// console.log(chalk.gray('Current directory:'), process.cwd());
+
+// ──────────────────────────────────────
+// IMPORT MODULES HERE
+
+
+
+
+
+
+
+// ──────────────────────────────────────
+// END OF TEST RUN
+// ──────────────────────────────────────
+console.log('\n' + chalk.bgGreen.black(' 🚩 Test Run Completed 🚩 ') + '\n');
+
+// ──────────────────────────────────────
+// QUICK SCRATCH PAD
+// ──────────────────────────────────────
+console.log(chalk.yellow('\n💡 Scratch Pad: Test small snippets here\n'));
+
+
+
+
+
+
+console.log('hello index');

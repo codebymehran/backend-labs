@@ -1,0 +1,7 @@
+The CPU, or central processing unit, is often referred to as the brain of the computer. It handles instructions from programs and processes data, making it essential for overall performance.
+
+Modern CPUs come with multiple cores, allowing them to perform several tasks simultaneously. This multi-core architecture boosts efficiency, especially for multitasking and demanding applications.
+
+Clock speed is another key factor, measured in gigahertz (GHz). A higher clock speed generally means faster processing, but other factors like architecture and cache size also play a significant role.
+
+Cooling solutions are crucial for maintaining optimal CPU performance. Overheating can lead to throttling, which slows down processing speeds. Proper cooling ensures longevity and reliability.
