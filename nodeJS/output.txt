@@ -1,4 +1,4 @@
-Line 1: Learning writable streams in Node.js
+  Line 1: Learning writable streams in Node.js
 Line 2: Each write sends a chunk of data
 Line 3: Streams handle data asynchronously
 Line 4: end() signals no more data is coming

@@ -44,7 +44,6 @@ console.log(chalk.gray('─'.repeat(50)));
 // ============================================
 // [Describe what you're building]
 
-
 // =============================
 // Layer 1: MVP (Minimum Viable Product)
 // =============================
@@ -52,9 +51,6 @@ console.log(chalk.green.bold('\n🟢 Layer 1: MVP'));
 console.log(chalk.green('─'.repeat(60) + '\n'));
 
 // TODO: Get it working with basic functionality
-
-
-
 
 // =============================
 // Layer 2: Enhanced Features
@@ -64,9 +60,6 @@ console.log(chalk.yellow('─'.repeat(60) + '\n'));
 
 // TODO: Add more features and better UX
 
-
-
-
 // =============================
 // Layer 3: Advanced Implementation
 // =============================
@@ -75,9 +68,6 @@ console.log(chalk.blue('─'.repeat(60) + '\n'));
 
 // TODO: Use advanced patterns, optimize performance
 
-
-
-
 // =============================
 // Layer 4: Professional Grade
 // =============================
@@ -85,9 +75,6 @@ console.log(chalk.magenta.bold('\n🟣 Layer 4: Professional Grade'));
 console.log(chalk.magenta('─'.repeat(60) + '\n'));
 
 // TODO: Complete error handling, testing, documentation
-
-
-
 
 console.log(chalk.cyan.bold('\n🎉 Mini project complete!'));
 
