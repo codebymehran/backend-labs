@@ -76,7 +76,7 @@ console.log(chalk.gray('─'.repeat(50)));
 console.log(chalk.green.bold('\n🟢 Layer 1: Basic Implementation'));
 console.log(chalk.green('─'.repeat(60) + '\n'));
 
-// TODO: Write the simplest solution that works
+// ? Write the simplest solution that works
 
 
 
@@ -87,7 +87,7 @@ console.log(chalk.green('─'.repeat(60) + '\n'));
 console.log(chalk.yellow.bold('\n🟡 Layer 2: Improved Version'));
 console.log(chalk.yellow('─'.repeat(60) + '\n'));
 
-// TODO: Refactor for better readability or add error handling
+// ? Refactor for better readability or add error handling
 
 
 
@@ -98,7 +98,7 @@ console.log(chalk.yellow('─'.repeat(60) + '\n'));
 console.log(chalk.blue.bold('\n🔵 Layer 3: Optimized Solution'));
 console.log(chalk.blue('─'.repeat(60) + '\n'));
 
-// TODO: Focus on performance or advanced patterns
+// ? Focus on performance or advanced patterns
 
 
 
@@ -109,7 +109,7 @@ console.log(chalk.blue('─'.repeat(60) + '\n'));
 console.log(chalk.magenta.bold('\n🟣 Layer 4: Production-Ready'));
 console.log(chalk.magenta('─'.repeat(60) + '\n'));
 
-// TODO: Add full error handling, edge cases, documentation
+// ? Add full error handling, edge cases, documentation
 
 
 
