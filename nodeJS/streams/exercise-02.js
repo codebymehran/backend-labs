@@ -70,17 +70,17 @@ function readableLayer() {
 console.log(chalk.blue.bold('\n🔵 Layer 3: Optimized Solution'));
 console.log(chalk.blue('─'.repeat(60) + '\n'));
 
-function optimizedLayer(){
+function optimizedLayer() {
   const filePath = 'output.txt';
-  const writer = fs.createWriteStream(filePath,{
-    highWaterMark:16
-  })
-  writer.on('error', err=>{
-        console.error(`[ERROR] Failed to write to '${filePath}': ${err.message}`);
-  })
-  writer.on('finish', ()=>{
+  const writer = fs.createWriteStream(filePath, {
+    highWaterMark: 16,
+  });
+  writer.on('error', err => {
+    console.error(`[ERROR] Failed to write to '${filePath}': ${err.message}`);
+  });
+  writer.on('finish', () => {
     console.log(`[INFO] Finished writing to '${filePath}'`);
-  })
+  });
   const lines = [
     'Line 1: Learning writable streams in Node.js\n',
     'Line 2: Each write sends a chunk of data\n',
@@ -88,18 +88,19 @@ function optimizedLayer(){
     'Line 4: end() signals no more data is coming\n',
     'Line 5: This file was written using fs.createWriteStream\n',
   ];
-  let i=0;
-  function writeNext(){
+  let i = 0;
+  function writeNext() {
     let canWrite = true; // this flag tracks buffer status, buffer is empty at start
-    while(i<lines.length && canWrite){ // buffer not full, so respecting back pressure
+    while (i < lines.length && canWrite) {
+      // buffer not full, so respecting back pressure
       //.write returns false if internal buffer is full
       canWrite = writer.write(lines[i]);
       i++;
     }
-    if(i<lines.length){
+    if (i < lines.length) {
       //Buffer full, wait until 'drain' before writing more
       writer.once('drain', writeNext);
-    }else{
+    } else {
       writer.end();
     }
   }
@@ -116,14 +117,12 @@ function optimizedLayer(){
 console.log(chalk.magenta.bold('\n🟣 Layer 4: Production-Ready'));
 console.log(chalk.magenta('─'.repeat(60) + '\n'));
 
-
 /**
  * Writes an array of lines to a file safely using writable streams.
  *
  * @param {string} filePath - The destination file path.
  * @param {string[]} lines - Array of strings to write.
  */
-
 
 function writeFileSafely(filePath, lines) {
   // Ensure directory exists
@@ -137,7 +136,9 @@ function writeFileSafely(filePath, lines) {
 
   // Error handling
   writer.on('error', err => {
-    console.error(`[${new Date().toISOString()}] [ERROR] Failed to write to '${filePath}': ${err.message}`);
+    console.error(
+      `[${new Date().toISOString()}] [ERROR] Failed to write to '${filePath}': ${err.message}`
+    );
   });
 
   // Finish handling
@@ -176,26 +177,10 @@ const linesToWrite = [
   'Line 2: Each write sends a chunk of data\n',
   'Line 3: Streams handle data asynchronously\n',
   'Line 4: end() signals no more data is coming\n',
-  'Line 5: This file was written using fs.createWriteStream\n'
+  'Line 5: This file was written using fs.createWriteStream\n',
 ];
 
 // Replace with a valid path
 // writeFileSafely('./output/output.txt', linesToWrite);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 console.log(chalk.green.bold('\n✅ Exercise complete!'));
-
-
