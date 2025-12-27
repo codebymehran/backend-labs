@@ -8,9 +8,9 @@ import fs from 'fs';
 
 // ⚠️ AUTO-GENERATED FILE
 // Managed by switch.sh
-// Currently testing: streams/exercise-04.js
+// Currently testing: streams/mini-project.js
 
-import './streams/exercise-04.js';
+import './streams/mini-project.js';
 
 // ──────────────────────────────────────
 // Other available modules (commented):
@@ -24,5 +24,5 @@ import './streams/exercise-04.js';
 // import './streams/exercise-01.js';
 // import './streams/exercise-02.js';
 // import './streams/exercise-03.js';
+// import './streams/exercise-04.js';
 // import './streams/exercise-05.js';
-// import './streams/mini-project.js';
