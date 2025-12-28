@@ -1,10 +1,8 @@
 import chalk from 'chalk';
-import {
-  rainbow,
-  pastel,
-} from 'gradient-string';
+import { rainbow, pastel } from 'gradient-string';
 import fs from 'fs';
 import { createInterface } from 'readline';
+
 // Date: December 20, 2025
 // 🚀 MINI PROJECT: Large File Access Log Analyzer (Real-World)
 
@@ -20,7 +18,6 @@ import { createInterface } from 'readline';
 // 192.168.1.60 - - [14/Dec/2025:20:49:43 +0000] "GET / HTTP/1.1" 200 1991 "Mozilla/5.0"
 // 192.168.1.148 - - [25/Dec/2025:12:27:02 +0000] "DELETE /contact HTTP/1.1" 404 4080 "PostmanRuntime/7.28.4"
 // 192.168.1.202 - - [12/Dec/2025:21:23:34 +0000] "DELETE / HTTP/1.1" 301 751 "Mozilla/5.0"
-
 
 // Each line represents one HTTP request handled by the server.
 
@@ -56,7 +53,6 @@ import { createInterface } from 'readline';
 
 // errors.log
 
-
 // Display a summary when processing is complete
 
 // 📊 Expected Output (Example)
@@ -65,7 +61,6 @@ import { createInterface } from 'readline';
 // Total ERROR requests: 812
 // Total WARNING requests: 436
 // Errors saved to: errors.log
-
 
 // (The numbers will vary depending on your log file.)
 
@@ -97,8 +92,6 @@ import { createInterface } from 'readline';
 
 console.log(chalk.bold('\n📂 Running: streams/mini-project.js'));
 console.log(chalk.gray('─'.repeat(50)));
-
-
 
 // =============================
 // Layer 1: MVP (Minimum Viable Product)
@@ -148,7 +141,6 @@ function analyzeWithEvents() {
 // The Async Iterator Way (The "Modern" Pattern)
 // =============================
 
-
 async function analyzeWithAsyncIterator() {
   const readStream = fs.createReadStream('access.log');
   const writeStream = fs.createWriteStream('errors.log');
@@ -177,8 +169,7 @@ async function analyzeWithAsyncIterator() {
   console.log(`Total WARNING requests: ${warningCount}`);
 }
 
-
-analyzeWithAsyncIterator();
+// analyzeWithAsyncIterator();
 // =============================
 //Why you don’t see rl.on('line') anymore
 // =============================
@@ -189,9 +180,6 @@ analyzeWithAsyncIterator();
 
 // Same data. Different interface.
 
-
-
-
 // =============================
 // Layer 2: Enhanced Features
 // =============================
@@ -200,20 +188,50 @@ console.log(chalk.yellow('─'.repeat(60) + '\n'));
 
 // TODO: Add more features and better UX
 
+async function analyzeWithAsyncIterator2() {
+  const readStream = fs.createReadStream('access.log', { encoding: 'utf8' });
+  const writeStream = fs.createWriteStream('errors.log', { encoding: 'utf8' });
 
+  const rl = createInterface({
+    input: readStream,
+    crlfDelay: Infinity,
+  });
 
+  const counters = { ERROR: 0, WARNING: 0, INFO: 0 };
 
+  // ✅ Helper function INSIDE
+  function handleLine(line) {
+    const match = line.match(/"\s(\d{3})\s/);
+  if(!match){
+    return;
+    }
+  const statusCode = Number(match[1]);
+    if (statusCode >= 400) {
+      counters.ERROR++;
+      writeStream.write(line + '\n');
+    } else if (statusCode >= 300) {
+      counters.WARNING++;
+    } else {
+      counters.INFO++; // optional bonus
+    }
+  }
 
+  // ✅ Async iterator consumes lines
+  for await (const line of rl) {
+    handleLine(line);
+  }
 
+  writeStream.end();
 
+ console.log('📊 Log Analysis Complete');
+ console.log('─────────────────────────');
+ console.log(`Total ERROR lines: ${counters.ERROR}`);
+ console.log(`Total WARNING lines: ${counters.WARNING}`);
+ console.log(`Total INFO lines: ${counters.INFO}`);
+ console.log('Errors saved to: errors.log');
+}
 
-
-
-
-
-
-
-
+analyzeWithAsyncIterator2();
 
 
 // =============================
@@ -223,6 +241,60 @@ console.log(chalk.blue.bold('\n🔵 Layer 3: Advanced Implementation'));
 console.log(chalk.blue('─'.repeat(60) + '\n'));
 
 // TODO: Use advanced patterns, optimize performance
+
+
+import { once } from 'events'; // 👈 Needed to wait for the writeStream
+
+
+async function analyzeWithAsyncIterator3(){
+  // We put everything in a try block to handle "File Not Found" etc.
+  try{
+    const readStream = fs.createReadStream('access.log',{encoding:'utf8'});
+    const writeStream = fs.createWriteStream('errors.log',{encoding:'utf8'});
+    readStream.on('error',err=>console.error('Read Error',err.message));
+    const rl = createInterface({input: readStream, crlfDelay:Infinity});
+    const counters = {ERROR:0,WARNING:0,INFO:0};
+    for await (const line of rl){
+      const match = line.match(/"\s(\d{3})\s/);
+      if(!match) continue; // skip lines that match
+      const statusCode = Number(match[1]);
+      if (statusCode >= 400) {
+        counters.ERROR++;
+        writeStream.write(`${line}\n`);
+      } else if (statusCode >= 300) {
+        counters.WARNING++;
+      } else {
+        counters.INFO++;
+      }
+    }
+
+    // 🛑 CRITICAL STEP:
+    writeStream.end();
+    await once(writeStream, 'finish'); // Wait for the "pen to be put down"
+
+//     💡 Why await once(writeStream, 'finish')?
+// In Node.js, writeStream.write() is asynchronous. If you have a massive file, Node might still be moving data from its internal buffer to the hard drive even after your loop ends.
+
+// If you don't await the finish, your script might exit while there's still data "in the pipe." Using once from the events module turns that event into a Promise you can wait for.
+
+
+ console.log('📊 Log Analysis Complete');
+ console.log('─────────────────────────');
+ console.log(`Total ERROR lines: ${counters.ERROR}`);
+ console.log(`Total WARNING lines: ${counters.WARNING}`);
+ console.log(`Total INFO lines: ${counters.INFO}`);
+ console.log('Errors saved to: errors.log');
+    }catch (error) {
+    console.error('❌ Fatal Error:', error.message);
+  }
+}
+
+// analyzeWithAsyncIterator3();
+
+
+
+
+
 
 // =============================
 // Layer 4: Professional Grade
@@ -234,19 +306,3 @@ console.log(chalk.magenta('─'.repeat(60) + '\n'));
 
 console.log(chalk.cyan.bold('\n🎉 Mini project complete!'));
 
-// ============================================
-//! 📝 REFLECTION
-// ============================================
-//* What I learned by building this:
-// -
-
-//* What I'd improve:
-// -
-
-//* What I want to explore next:
-// -
-
-//* Evolution through layers:
-// - Layer 1 → 2:
-// - Layer 2 → 3:
-// - Layer 3 → 4:
