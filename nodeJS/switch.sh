@@ -1,76 +1,71 @@
 #!/bin/bash
 set -euo pipefail
 
-FILTER=${1:-}
-
 # -----------------------------
-# Resolve file
+# Step 1: Select a topic
 # -----------------------------
-if [[ "$FILTER" == *.js ]]; then
-  FILE="$FILTER"
-  [ -f "$FILE" ] || { echo "❌ File not found: $FILE"; exit 1; }
-else
-  ALL_FILES=$(find . -type f \
-    \( -name "exercise-*.js" -o -name "mini-project.js" \) \
-    ! -path "*/node_modules/*" ! -path "*/.*" |
-    sed 's|^\./||' | sort)
+TOPICS=$(find . -maxdepth 1 -type d ! -name ".*" ! -name "." | sed 's|^\./||' | sort)
 
-  if [ -n "$FILTER" ]; then
-    FILES=$(echo "$ALL_FILES" | grep "^$FILTER/") || true
-    [ -n "$FILES" ] || { echo "❌ No files found for topic: $FILTER"; exit 1; }
-  else
-    FILES="$ALL_FILES"
-    echo "📚 Available topics:"
-    echo "$FILES" | sed 's|/.*||' | sort -u | nl
-    echo ""
-  fi
-
-  echo "$FILES" | nl
-  echo ""
-  read -p "Select file number: " num
-
-  FILE=$(echo "$FILES" | sed -n "${num}p")
-  [ -n "$FILE" ] || { echo "❌ Invalid selection"; exit 1; }
+if [ -z "$TOPICS" ]; then
+  echo "❌ No topics found. Create one with ./setup-topic.sh"
+  exit 1
 fi
 
-# -----------------------------
-# index.js rewrite (intentional)
-# -----------------------------
-[ -f index.js ] || { echo "❌ index.js not found"; exit 1; }
+echo "📂 Available topics:"
+echo "$TOPICS" | nl
+echo ""
+read -p "Select topic number: " topic_num
 
-HEADER=$(sed -n '1,/IMPORT MODULES HERE/p' index.js)
+TOPIC=$(echo "$TOPICS" | sed -n "${topic_num}p")
+[ -n "$TOPIC" ] || { echo "❌ Invalid selection"; exit 1; }
+
+# -----------------------------
+# Step 2: Select a file in topic
+# -----------------------------
+FILES=$(find "$TOPIC" -type f -name "*.js" | sort)
+if [ -z "$FILES" ]; then
+  echo "❌ No JS files found in $TOPIC"
+  exit 1
+fi
+
+echo ""
+echo "📂 Files in $TOPIC:"
+echo "$FILES" | nl
+echo ""
+read -p "Select file number to run: " file_num
+
+FILE=$(echo "$FILES" | sed -n "${file_num}p")
+[ -n "$FILE" ] || { echo "❌ Invalid selection"; exit 1; }
+
+# -----------------------------
+# Step 3: Rewrite index.js
+# -----------------------------
+if [ ! -f index.js ]; then
+  echo "// ──────────────────────────────" > index.js
+  echo "// AUTO-GENERATED index.js" >> index.js
+  echo "// Use switch.sh to select a file to run" >> index.js
+  echo "// ──────────────────────────────" >> index.js
+fi
+
+HEADER=$(sed -n '1,/AUTO-GENERATED/p' index.js)
 
 cat > index.js << EOF
 $HEADER
 
-// ⚠️ AUTO-GENERATED FILE
-// Managed by switch.sh
+// ⚠️ AUTO-GENERATED
 // Currently testing: $FILE
-
 import './$FILE';
 
+// Other files (commented):
 EOF
 
-echo "// ──────────────────────────────────────" >> index.js
-echo "// Other available modules (commented):" >> index.js
-echo "// ──────────────────────────────────────" >> index.js
-
-find . -type f \
-  \( -name "exercise-*.js" -o -name "mini-project.js" \) \
-  ! -path "*/node_modules/*" ! -path "*/.*" |
-  sed 's|^\./||' | sort |
-while read -r f; do
+find . -type f -name "*.js" ! -path "*/node_modules/*" ! -path "./index.js" | sort | while read -r f; do
   [ "$f" != "$FILE" ] && echo "// import './$f';" >> index.js
 done
 
+# -----------------------------
+# Step 4: Run the file
+# -----------------------------
 echo ""
 echo "✅ Now testing: $FILE"
-echo ""
-
-if pgrep -f nodemon >/dev/null; then
-  echo "🔄 Nodemon detected — auto-reload active"
-else
-  node index.js
-fi
-
-echo ""
+node index.js
